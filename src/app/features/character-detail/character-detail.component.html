@@ -1,0 +1,140 @@
+@if (character(); as c) {
+  <main class="grow w-full px-margin py-lg">
+    <div class="max-w-360 mx-auto space-y-xl">
+
+      <!-- Back Button -->
+      <a routerLink="/characters" class="inline-flex items-center gap-xs text-label-md text-on-surface-variant hover:text-primary transition-colors group">
+        <span class="material-symbols-outlined text-[20px] group-hover:-translate-x-1 transition-transform">arrow_back</span>
+        Character Roster
+      </a>
+
+      <!-- Main Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-xl items-start">
+
+        <!-- Left: Character Illustration Panel -->
+        <div class="lg:col-span-5">
+          <div class="rounded-xl overflow-hidden bg-surface-container-lowest shadow-[0px_8px_30px_rgba(157,78,221,0.08)] border border-outline-variant/30 sticky top-28">
+            <div class="aspect-3/4 relative">
+              <img [src]="c.imageUrl" [alt]="c.imageAlt" class="w-full h-full object-cover" />
+              <div class="absolute inset-0 bg-linear-to-t from-surface via-transparent to-transparent opacity-40"></div>
+              <div class="absolute bottom-md left-md right-md">
+                <div class="glass-card p-md rounded-lg flex justify-between items-center">
+                  <div>
+                    <p class="text-label-sm text-on-surface-variant uppercase tracking-wider">Current Power</p>
+                    <p class="text-display-lg text-primary">{{ c.power }}</p>
+                  </div>
+                  <div class="text-right">
+                    <p class="text-label-sm text-on-surface-variant uppercase tracking-wider">Survivability</p>
+                    <div class="flex items-center gap-xs">
+                      <span class="text-headline-lg text-secondary">{{ c.tier }}</span>
+                      <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">verified</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Stats and Abilities Panel -->
+        <div class="lg:col-span-7 flex flex-col gap-lg">
+
+          <!-- Header -->
+          <section>
+            <h1 class="text-display-lg text-on-surface mb-xs">{{ c.name }}</h1>
+            <p class="text-headline-md text-primary font-medium">{{ c.subtitle }}</p>
+            <div class="mt-md flex gap-sm flex-wrap">
+              @for (tag of c.tags; track tag.label) {
+                <span class="px-md py-xs {{ tag.bg }} {{ tag.text }} rounded-full text-label-md">{{ tag.label }}</span>
+              }
+            </div>
+          </section>
+
+          <!-- Ability Bento Grid -->
+          <section class="grid grid-cols-1 md:grid-cols-2 gap-md">
+            @for (ability of c.abilities; track ability.name) {
+              @if (ability.colorAccent === 'ultimate') {
+                <div class="bg-primary text-on-primary p-md rounded-xl shadow-lg hover:shadow-xl transition-all cursor-pointer relative overflow-hidden">
+                  <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-2xl"></div>
+                  <div class="flex justify-between items-start mb-md relative z-10">
+                    <div class="p-sm bg-white/20 rounded-lg text-white">
+                      <span class="material-symbols-outlined">{{ ability.icon }}</span>
+                    </div>
+                    <span class="text-label-sm text-white/80 bg-white/10 px-sm py-1 rounded">{{ ability.binding }}</span>
+                  </div>
+                  <h3 class="text-headline-md relative z-10">{{ ability.name }}</h3>
+                  <p class="text-body-md mt-sm relative z-10 text-white/90">{{ ability.description }}</p>
+                  <div class="mt-md flex items-center gap-md relative z-10">
+                    <div class="flex items-center gap-xs">
+                      <span class="material-symbols-outlined text-[14px] text-white/80">schedule</span>
+                      <span class="text-label-sm">{{ ability.cooldown }}</span>
+                    </div>
+                    <div class="flex items-center gap-xs">
+                      <span class="material-symbols-outlined text-[14px] text-white/80">flash_on</span>
+                      <span class="text-label-sm">{{ ability.mana }}</span>
+                    </div>
+                  </div>
+                </div>
+              } @else {
+                <div class="bg-surface-container-lowest p-md rounded-xl border border-outline-variant/50 hover:-translate-y-1 hover:shadow-md transition-all group cursor-pointer">
+                  <div class="flex justify-between items-start mb-md">
+                    <div class="p-sm {{ ability.iconBg }} rounded-lg {{ ability.iconColor }}">
+                      <span class="material-symbols-outlined"
+                            [style.font-variation-settings]="ability.iconFill ? '\'FILL\' 1' : 'normal'">{{ ability.icon }}</span>
+                    </div>
+                    <span class="text-label-sm text-on-surface-variant bg-surface-container px-sm py-1 rounded">{{ ability.binding }}</span>
+                  </div>
+                  <h3 class="text-headline-md text-on-surface group-hover:text-primary transition-colors">{{ ability.name }}</h3>
+                  <p class="text-body-md text-on-surface-variant mt-sm">{{ ability.description }}</p>
+                  <div class="mt-md flex items-center gap-md">
+                    <div class="flex items-center gap-xs">
+                      <span class="material-symbols-outlined text-[14px] text-on-surface-variant">schedule</span>
+                      <span class="text-label-sm">{{ ability.cooldown }}</span>
+                    </div>
+                    <div class="flex items-center gap-xs">
+                      <span class="material-symbols-outlined text-[14px] text-on-surface-variant">flash_on</span>
+                      <span class="text-label-sm">{{ ability.mana }}</span>
+                    </div>
+                  </div>
+                </div>
+              }
+            }
+          </section>
+
+          <!-- Mastery Action -->
+          <section>
+            <div class="bg-surface-container p-lg rounded-xl border border-outline-variant/30 flex flex-col md:flex-row items-center justify-between gap-md">
+              <div>
+                <h4 class="text-headline-md text-on-surface">Unlocking True Potential</h4>
+                <p class="text-body-md text-on-surface-variant">Customizing {{ c.name }}'s abilities via the mastery tree significantly alters gameplay style.</p>
+              </div>
+              <button class="bg-on-surface text-surface px-xl py-md rounded-lg text-label-md font-bold transition-all hover:bg-primary active:scale-95 whitespace-nowrap shadow-md">
+                Open Mastery Tree
+              </button>
+            </div>
+          </section>
+
+          <!-- Progress Bars -->
+          <section class="grid grid-cols-1 md:grid-cols-3 gap-md">
+            @for (stat of c.stats; track stat.label) {
+              <div class="flex flex-col gap-xs">
+                <div class="flex justify-between text-label-sm text-on-surface-variant">
+                  <span>{{ stat.label }}</span>
+                  <span>{{ stat.value }}</span>
+                </div>
+                <div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
+                  <div class="h-full rounded-full {{ stat.color }}" [style.width.%]="stat.percent"></div>
+                </div>
+              </div>
+            }
+          </section>
+
+        </div>
+      </div>
+    </div>
+  </main>
+} @else {
+  <main class="grow w-full px-margin py-lg flex items-center justify-center">
+    <p class="text-headline-md text-on-surface-variant">Character not found.</p>
+  </main>
+}

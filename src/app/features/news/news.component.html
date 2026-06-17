@@ -1,0 +1,153 @@
+<main class="max-w-360 mx-auto px-margin py-lg">
+
+  <!-- Category Filter -->
+  <section class="mb-lg">
+    <div class="flex items-center gap-md overflow-x-auto pb-sm">
+      @for (cat of categories; track cat) {
+        <button
+          (click)="setCategory(cat)"
+          [class]="activeCategory() === cat
+            ? 'px-md py-sm bg-primary text-on-primary rounded-full text-label-md'
+            : 'px-md py-sm bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high rounded-full text-label-md transition-colors'">
+          {{ cat }}
+        </button>
+      }
+    </div>
+  </section>
+
+  <!-- Hero Bento Grid -->
+  <section class="grid grid-cols-12 gap-gutter mb-xl">
+
+    <!-- Main Featured News -->
+    <div class="col-span-12 lg:col-span-8 group cursor-pointer relative overflow-hidden rounded-xl bg-surface-container shadow-[0px_4px_20px_rgba(157,78,221,0.05)] border border-outline-variant">
+      <div class="aspect-video w-full overflow-hidden">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgAYYpy0RejQMxo-J2zl18-8e69fi0Oa9IsXLGYd-qrlj8hutz7IrWah_Xjh6zYtcL2Ins8oXF6SbjutUBeKvzm_a0f0RUJNVjBUSM1-59QLyZmDmNpxg4Y9O2aetshwPC44uoEBTpiqPEtjhU9EgMyJzhuyjfT4uaK1lvV0-Aq6-EAD-iYsetkFm7j3lbkWpb6N2rBLj4J3_9_rzlY7I-w8bTLY3sAciyxphR3gVwHGQDW_MngEQ6pK3MKa-qpQe4tdmRkrDpsq9v"
+             alt="Featured News"
+             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+      </div>
+      <div class="p-lg">
+        <div class="flex items-center gap-sm mb-sm">
+          <span class="bg-secondary-container text-on-secondary-container px-sm py-xs rounded text-label-sm uppercase tracking-wider">Major Event</span>
+          <span class="text-on-surface-variant text-label-sm">• 2 hours ago</span>
+        </div>
+        <h1 class="text-display-lg mb-md group-hover:text-primary transition-colors">World Championship 2024: The Pro-Play Era Begins</h1>
+        <p class="text-body-lg text-on-surface-variant line-clamp-2 max-w-2xl">Dive into the comprehensive preview of this year's most anticipated esports tournament. With new character balancing and professional shifts, the meta is about to change forever.</p>
+      </div>
+    </div>
+
+    <!-- Side Cards -->
+    <div class="col-span-12 lg:col-span-4 flex flex-col gap-gutter">
+      <div class="flex-1 bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex flex-col justify-between hover:shadow-md transition-shadow cursor-pointer group">
+        <div>
+          <span class="text-primary text-label-sm mb-xs block">Update</span>
+          <h3 class="text-headline-md mb-sm group-hover:text-primary transition-colors">Patch 1.4: Velocity Mechanics Overhaul</h3>
+          <p class="text-body-md text-on-surface-variant line-clamp-2">Complete breakdown of every character change and movement adjustment coming this Thursday.</p>
+        </div>
+        <div class="mt-md flex items-center justify-between">
+          <span class="text-on-surface-variant text-label-sm">4 min read</span>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </div>
+      </div>
+      <div class="flex-1 bg-surface-container-lowest border border-outline-variant rounded-xl p-md flex flex-col justify-between hover:shadow-md transition-shadow cursor-pointer group">
+        <div>
+          <span class="text-tertiary text-label-sm mb-xs block">Community</span>
+          <h3 class="text-headline-md mb-sm group-hover:text-primary transition-colors">New Character Reveal: Project 'Eclipse'</h3>
+          <p class="text-body-md text-on-surface-variant line-clamp-2">Leaked concepts suggest a gravity-bending abilities kit for the upcoming strategist hero.</p>
+        </div>
+        <div class="mt-md flex items-center justify-between">
+          <span class="text-on-surface-variant text-label-sm">8 min read</span>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Feed -->
+  <div class="grid grid-cols-12 gap-gutter">
+
+    <!-- News Feed -->
+    <div class="col-span-12 lg:col-span-8">
+      <div class="flex items-center justify-between mb-md border-b border-outline-variant pb-base">
+        <h2 class="text-headline-lg">Latest Stories</h2>
+        <div class="flex gap-sm">
+          <button class="p-xs hover:bg-surface-container rounded transition-colors">
+            <span class="material-symbols-outlined">grid_view</span>
+          </button>
+          <button class="p-xs bg-surface-container rounded transition-colors">
+            <span class="material-symbols-outlined text-primary">view_list</span>
+          </button>
+        </div>
+      </div>
+      <div class="flex flex-col gap-md">
+        @for (article of articles; track article.title) {
+          <app-news-card [article]="article" />
+        }
+        <button class="w-full py-md border-2 border-dashed border-outline-variant rounded-xl text-on-surface-variant text-label-md hover:bg-surface-container-low hover:border-primary hover:text-primary transition-all mt-md">
+          LOAD MORE STORIES
+        </button>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="col-span-12 lg:col-span-4 flex flex-col gap-lg">
+
+      <!-- Newsletter -->
+      <div class="bg-primary-container p-lg rounded-xl text-on-primary-container">
+        <h4 class="text-headline-md mb-sm">Stay Updated</h4>
+        <p class="text-body-md mb-md opacity-90">Get weekly pro-play strategies and news delivered to your inbox.</p>
+        <div class="flex flex-col gap-sm">
+          <input type="email" placeholder="Email Address"
+                 class="bg-white/20 border border-white/30 rounded-lg px-md py-sm placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-secondary-container transition-all" />
+          <button class="bg-white text-primary text-label-md py-sm rounded-lg hover:bg-secondary-container transition-colors">Join the HQ</button>
+        </div>
+      </div>
+
+      <!-- Trending -->
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md">
+        <h4 class="text-label-sm text-primary uppercase tracking-widest mb-md">Trending Now</h4>
+        <ul class="flex flex-col gap-md">
+          @for (topic of trendingTopics; track topic.rank) {
+            <li class="flex items-start gap-md group cursor-pointer">
+              <span class="text-headline-lg text-outline-variant group-hover:text-primary transition-colors">{{ topic.rank }}</span>
+              <div>
+                <h5 class="text-label-md font-semibold mb-xs">{{ topic.title }}</h5>
+                <span class="text-on-surface-variant text-label-sm">{{ topic.views }}</span>
+              </div>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <!-- Pro Streamers -->
+      <div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md">
+        <h4 class="text-label-sm text-primary uppercase tracking-widest mb-md">Pro Streamers</h4>
+        <div class="flex flex-col gap-sm">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-sm">
+              <img class="w-10 h-10 rounded-full status-ring"
+                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuCB02czdc4ijmx9G1dk50QscmxF1KrWtAPFToAk_qMmDvRaGCpfCRo0LXuA-UXy60ag2N4L205E72LiR6N3S5JfYdzzR91N1nFG0oadoGlugXvPEX4t7Oj4ngI1Z4X_NTpnMurrUufSeaIkKrPOFLqKvGVtAwo_KLafxjh-oVvp8opZL26-NYoTCIT9kKJ36kzxvp29mcBwOBdoVSm3pgiry4JLk_Y3NrWzBp8mHnKWqfVwuhpS2VsZp5i4rbjDF8_66bZCetlwAn7i"
+                   alt="ViperFPS avatar" />
+              <div>
+                <p class="text-label-md">ViperFPS</p>
+                <p class="text-secondary text-label-sm">LIVE - Radiant Rank</p>
+              </div>
+            </div>
+            <span class="material-symbols-outlined text-error">podcasts</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-sm">
+              <img class="w-10 h-10 rounded-full border-2 border-primary"
+                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3q6Elx8BAptcdYmf9xqUSIedkQCon7BhlueAXjkTcoiFUadDTqh-jWxEI_mqYaXssoVKO_snyh5V-_eh-DqVt2iCATbPYuPM2oJETxq0JX93xlg7tfoxzLwMjt1Qlpw1JW99F2B2r5oOkWVW-DdxRqep1nD7_X7iiviGidYqpkxoLah_A57PBObYrxWmeey3aueTb6Vckc6mZSNmwM-9vA4k6qMyBJEMeBCwMU_RznzcXZ1r8QTRP60ln2x2tt7gz9mDUxq9fkAz1"
+                   alt="NovaTheory avatar" />
+              <div>
+                <p class="text-label-md">NovaTheory</p>
+                <p class="text-on-surface-variant text-label-sm">Scouting League</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+  </div>
+</main>

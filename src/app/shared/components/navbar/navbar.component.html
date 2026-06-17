@@ -1,0 +1,37 @@
+<header class="bg-surface shadow-[0px_4px_20px_rgba(157,78,221,0.05)] sticky top-0 z-50 h-20 w-full flex items-center">
+  <div class="flex justify-between items-center w-full px-margin h-20 max-w-360 mx-auto">
+
+    <div class="flex items-center gap-md">
+      <span class="text-headline-md font-bold text-primary">GamerHQ</span>
+      <nav class="hidden md:flex items-center gap-md ml-lg">
+        <a routerLink="/" routerLinkActive="text-primary border-b-2 border-primary pb-1 font-semibold"
+           [routerLinkActiveOptions]="{exact: true}"
+           class="text-on-surface-variant hover:text-primary transition-colors text-body-md">Home</a>
+        <a routerLink="/characters" routerLinkActive="text-primary border-b-2 border-primary pb-1 font-semibold"
+           class="text-on-surface-variant hover:text-primary transition-colors text-body-md">Characters</a>
+        <a routerLink="/news" routerLinkActive="text-primary border-b-2 border-primary pb-1 font-semibold"
+           class="text-on-surface-variant hover:text-primary transition-colors text-body-md">News</a>
+      </nav>
+    </div>
+
+    <div class="flex items-center gap-md">
+      <div class="flex items-center gap-sm">
+        <button class="p-base rounded-full hover:bg-surface-container transition-all">
+          <span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+        </button>
+        <button class="p-base rounded-full hover:bg-surface-container transition-all">
+          <span class="material-symbols-outlined text-on-surface-variant">settings</span>
+        </button>
+      </div>
+      <div class="h-8 w-[1px] bg-outline-variant mx-sm"></div>
+      <button class="text-on-surface-variant hover:text-primary text-label-md px-md py-sm">Login</button>
+      <button class="bg-primary text-on-primary px-md py-sm rounded-lg text-label-md active:scale-95 transition-transform">Go Pro</button>
+      <div class="ml-sm">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrEFrbw64rgLinEZkuJXkjcq-7ZHM00F-BSuT0ftCu0X2zUDwLzAWUtg4xqIHsYZkHYt6QiscmWPIbbuLc3uTsg1DL6y1MTD20TuaaI87cPEla_6F35sXimtKvpimqHR621KTT_n7CrEHJmKmNr57nKoihmMeJ4ZGnLhTAvBW2vyHz5Rnw_kwY9QMRRlIYJdgb8cQZcwfjUBFHV0shJXA-QL5AyJQklZ97dsZlyGwYD5vj9fGG_6UAatZVnnLBSAaZo9qlCcy0DpE4"
+             alt="User Avatar"
+             class="w-10 h-10 rounded-full status-ring object-cover" />
+      </div>
+    </div>
+
+  </div>
+</header>

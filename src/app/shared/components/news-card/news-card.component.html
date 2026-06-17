@@ -1,0 +1,15 @@
+<article class="flex flex-col md:flex-row gap-md p-md bg-white rounded-xl border border-outline-variant hover:border-primary transition-all group cursor-pointer">
+  <div class="w-full md:w-64 h-44 overflow-hidden rounded-lg shrink-0">
+    <img [src]="article().imageUrl" [alt]="article().imageAlt"
+         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+  </div>
+  <div class="flex flex-col justify-center flex-1">
+    <div class="flex items-center gap-base mb-xs">
+      <span class="text-{{ article().categoryColor }} text-label-sm">{{ article().category }}</span>
+      <span class="w-1 h-1 bg-outline rounded-full"></span>
+      <span class="text-on-surface-variant text-label-sm">{{ article().timeAgo }}</span>
+    </div>
+    <h3 class="text-headline-md mb-xs group-hover:text-primary transition-colors">{{ article().title }}</h3>
+    <p class="text-body-md text-on-surface-variant line-clamp-2">{{ article().summary }}</p>
+  </div>
+</article>
