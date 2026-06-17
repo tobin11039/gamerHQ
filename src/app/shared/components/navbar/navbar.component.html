@@ -15,7 +15,7 @@
     </div>
 
     <div class="flex items-center gap-md">
-      <div class="flex items-center gap-sm">
+      <div class="hidden md:flex items-center gap-sm">
         <button class="p-base rounded-full hover:bg-surface-container transition-all">
           <span class="material-symbols-outlined text-on-surface-variant">notifications</span>
         </button>
@@ -23,15 +23,46 @@
           <span class="material-symbols-outlined text-on-surface-variant">settings</span>
         </button>
       </div>
-      <div class="h-8 w-[1px] bg-outline-variant mx-sm"></div>
-      <button class="text-on-surface-variant hover:text-primary text-label-md px-md py-sm">Login</button>
-      <button class="bg-primary text-on-primary px-md py-sm rounded-lg text-label-md active:scale-95 transition-transform">Go Pro</button>
+      <div class="hidden md:block h-8 w-px bg-outline-variant mx-sm"></div>
+      <button class="hidden md:block text-on-surface-variant hover:text-primary text-label-md px-md py-sm">Login</button>
+      <button class="hidden md:block bg-primary text-on-primary px-md py-sm rounded-lg text-label-md active:scale-95 transition-transform">Go Pro</button>
       <div class="ml-sm">
         <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrEFrbw64rgLinEZkuJXkjcq-7ZHM00F-BSuT0ftCu0X2zUDwLzAWUtg4xqIHsYZkHYt6QiscmWPIbbuLc3uTsg1DL6y1MTD20TuaaI87cPEla_6F35sXimtKvpimqHR621KTT_n7CrEHJmKmNr57nKoihmMeJ4ZGnLhTAvBW2vyHz5Rnw_kwY9QMRRlIYJdgb8cQZcwfjUBFHV0shJXA-QL5AyJQklZ97dsZlyGwYD5vj9fGG_6UAatZVnnLBSAaZo9qlCcy0DpE4"
              alt="User Avatar"
              class="w-10 h-10 rounded-full status-ring object-cover" />
       </div>
+      <button class="md:hidden p-base rounded-full hover:bg-surface-container transition-all" (click)="toggleMenu()" [attr.aria-expanded]="menuOpen()" aria-label="Toggle menu">
+        <span class="material-symbols-outlined text-on-surface-variant">{{ menuOpen() ? 'close' : 'menu' }}</span>
+      </button>
     </div>
 
   </div>
 </header>
+
+@if (menuOpen()) {
+  <div class="md:hidden fixed inset-0 z-40 bg-black/50" (click)="closeMenu()"></div>
+  <nav class="md:hidden fixed top-20 left-0 right-0 z-50 bg-surface shadow-lg px-margin py-lg flex flex-col gap-sm">
+    <a routerLink="/" routerLinkActive="text-primary font-semibold"
+       [routerLinkActiveOptions]="{exact: true}"
+       (click)="closeMenu()"
+       class="text-on-surface-variant hover:text-primary transition-colors text-body-md py-sm border-b border-outline-variant">Home</a>
+    <a routerLink="/characters" routerLinkActive="text-primary font-semibold"
+       (click)="closeMenu()"
+       class="text-on-surface-variant hover:text-primary transition-colors text-body-md py-sm border-b border-outline-variant">Characters</a>
+    <a routerLink="/news" routerLinkActive="text-primary font-semibold"
+       (click)="closeMenu()"
+       class="text-on-surface-variant hover:text-primary transition-colors text-body-md py-sm border-b border-outline-variant">News</a>
+    <div class="flex items-center gap-sm pt-sm">
+      <button class="p-base rounded-full hover:bg-surface-container transition-all">
+        <span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+      </button>
+      <button class="p-base rounded-full hover:bg-surface-container transition-all">
+        <span class="material-symbols-outlined text-on-surface-variant">settings</span>
+      </button>
+    </div>
+    <div class="flex items-center gap-sm pt-sm">
+      <button class="text-on-surface-variant hover:text-primary text-label-md px-md py-sm">Login</button>
+      <button class="bg-primary text-on-primary px-md py-sm rounded-lg text-label-md active:scale-95 transition-transform">Go Pro</button>
+    </div>
+  </nav>
+}
